@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block extra_head %}{% endblock extra_head %}
+
+{% block page_header %}
+<h1>Logged out</h1>
+{% endblock page_header %}
+
+{% block content %}
+<p>
+You have been successfully logged out.<br>
+You can <a href="{% url 'contas:login' %}">log-in again</a>.
+</p>
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}{% load bootstrap4 %}
+
+{% block page_header %}
+<h1>Login</h1>
+{% endblock page_header %}
+
+{% block content %}
+<p>Please, provide your login details to start using this program:</p>
+<form method="post">
+  {% bootstrap_form form %}
+  {% csrf_token %}
+  {{ buttons }}
+  <input type="submit" value="Login">
+  {{ endbuttons }}
+</form>
+<p>
+  If you don't have an account yet,
+  <a href="{% url 'accounts:register' %}">register here</a>
+</p>
+{% endblock content %}
