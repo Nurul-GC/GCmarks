@@ -29,9 +29,9 @@
 
   {% block extra_head %}{% endblock extra_head %}
 </head>
-<body class="bg-light">
-<nav class="navbar navbar-expand-md navbar-light bg-dark mb-4 border">
-  <a class="navbar-brand" href="{% url 'contas:inicio' %}">GCmarks</a>
+<body class="bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 border">
+  <a class="navbar-brand" href="{% url 'accounts:index' %}">GCmarks</a>
 
   <button
       class="navbar-toggler"
@@ -39,7 +39,7 @@
       data-toggle="collapse"
       data-target="#navbarCollapse"
       aria-controls="navbarCollapse"
-      aria-expanded="false"
+      aria-expanded="true"
       aria-label="Toggle navigation"
   >
     <span class="navbar-toggler-icon"></span>
@@ -48,36 +48,36 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'contas:inicio' %}" title=""></a>
+        <a class="nav-link" href="{% url 'accounts:dashboard' %}" title="">Dashboard</a>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto">
       {% if user.is_authenticated %}
       <li class="nav-item">
-        <span class="navbar-text"><b>Olaa, {{ user.username }}!</b> -</span>
+        <span class="navbar-text"><b>Hello, {{ user.username }}!</b> -</span>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'contas:logout' %}">Terminar sessao</a>
+        <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
       </li>
       {% else %}
       <li class="nav-item">
-        <span class="navbar-text"><b>Olaa, Companheiro!</b> -</span>
+        <span class="navbar-text"><b>Hello, Dude!</b> -</span>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'contas:inicio' %}">Inicie sessao</a>
+        <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'contas:cadastrar' %}">Cadastre-se</a>
+        <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
       </li>
       {% endif %}
     </ul>
   </div>
 </nav>
-<main role="main" class="container bg-dark" style="padding: 10px; border-radius: 5px;">
+<main role="main" class="container bg-light" style="padding: 10px; border-radius: 5px;">
   <div class="pb-2 mb-2 border-bottom">
     {% block page_header %}{% endblock page_header %}
   </div>
