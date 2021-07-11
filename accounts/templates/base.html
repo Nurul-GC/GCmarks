@@ -48,14 +48,17 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'accounts:dashboard' %}" title="">Dashboard</a>
+        <a class="nav-link" href="{% url 'accounts:dashboard' %}">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'images:create' %}">Images</a>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto">
       {% if user.is_authenticated %}
       <li class="nav-item">
-        <span class="navbar-text"><b>Hello, {{ user.username }}!</b> -</span>
+        <span class="navbar-text"><b>Hello, {{ user.username }}</b> -</span>
       </li>
 
       <li class="nav-item">
@@ -63,7 +66,7 @@
       </li>
       {% else %}
       <li class="nav-item">
-        <span class="navbar-text"><b>Hello, Dude!</b> -</span>
+        <span class="navbar-text"><b>Hello, Dude</b> -</span>
       </li>
 
       <li class="nav-item">
@@ -79,6 +82,17 @@
 </nav>
 <main role="main" class="container bg-light" style="padding: 10px; border-radius: 5px;">
   <div class="pb-2 mb-2 border-bottom">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">
+        {{ message|safe }}
+        <a href="#" class="close">X</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
     {% block page_header %}{% endblock page_header %}
   </div>
   <div>{% block content %}{% endblock content %}</div>

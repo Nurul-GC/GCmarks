@@ -1,5 +1,29 @@
 {% extends 'base.html' %}{% load bootstrap4 %}
 
+{% block extra_head %}
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1025303141542940',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{api-version}'
+    });
+
+    FB.AppEvents.logPageView();
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+{% endblock extra_head %}
+
 {% block page_header %}
 <h1>Login</h1>
 {% endblock page_header %}
@@ -15,6 +39,18 @@
 </form>
 <p>
   If you don't have an account yet,
-  <a href="{% url 'accounts:register' %}">register here</a>
+  <a class="btn" href="{% url 'accounts:register' %}">register here</a>
 </p>
+
+<div class="social">
+  <ul>
+    <li>
+      <a style="background-color:blue; color:white;" class="btn"
+         href="{% url 'social:begin' 'facebook' %}"
+      >
+        Sign in with Facebook
+      </a>
+    </li>
+  </ul>
+</div>
 {% endblock content %}
