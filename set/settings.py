@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -25,12 +24,13 @@ SECRET_KEY = 'django-insecure-mg3j-_hwut!l*!x33vi*jn0y4au7d-_u)w8!tm=x(65#^^8(_7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'gcmarks.com', '127.0.0.1']
 
 # Application definition
 
 INSTALLED_APPS = [
     'accounts',
+    'images.apps.ImagesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
+    'social_django',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -70,9 +72,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'set.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+
 if not os.path.exists(f'{BASE_DIR}/database'):
     os.mkdir(f'{BASE_DIR}/database')
 
@@ -82,7 +84,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'database/gcmarks.db',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -102,6 +103,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+    # social networks profile login
+    'social_core.backends.facebook.FacebookOAuth2',
+]
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1025303141542940'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'dd31ff9bde439846703801ec3b9b878c'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -116,7 +126,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -128,9 +137,13 @@ if not os.path.exists(f'{BASE_DIR}/media'):
     os.mkdir(f'{BASE_DIR}/media/')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join('images/media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Setting certificate path details to handle https requests
+if not os.path.exists(f'{BASE_DIR}/certificate'):
+    os.mkdir(f'{BASE_DIR}/certificate')
