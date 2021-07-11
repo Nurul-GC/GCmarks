@@ -3,11 +3,10 @@
 {% block extra_head %}{% endblock extra_head %}
 
 {% block page_header %}
-<h1>Edit your account</h1>
+<h1>You can edit your account using the following form:</h1>
 {% endblock page_header %}
 
 {% block content %}
-<p>You can edit your account using the following form:</p>
 <form method="post" enctype="multipart/form-data">
   {{ bootstrap_form user_form }}
   {{ bootstrap_form profile_form }}
