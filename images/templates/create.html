@@ -1,0 +1,18 @@
+{% extends 'base.html' %}{% load bootstrap4 %}
+
+{% block extra_head %}{% endblock extra_head %}
+
+{% block page_header %}
+<h1>Bookmark an image</h1>
+{% endblock page_header %}
+
+{% block content %}
+<img src="{{ request.GET.url }}" class="image-preview">
+<form method="post">
+  {{ bootstrap_form form }}
+  {% csrf_token %}
+  {{ buttons }}
+  <input type="submit" value="Bookmark it!">
+  {{ endbuttons }}
+</form>
+{% endblock content %}
